@@ -8,15 +8,15 @@ const ExpenseForm = (props) => {
         e.preventDefault();
         const expenseData ={
             title:title,
-            price:price,
+            price:+price,
             date: new Date(date)
         }
-        console.log(expenseData)
         props.onSaveExpenseData(expenseData);
         setTitle('');
         setPrice('');
         setDate('');
     }
+    
     return (
         <form onSubmit={submitHandler}>
             <div className="new-expense__controls">
@@ -25,7 +25,7 @@ const ExpenseForm = (props) => {
                     <input type="text" id='title' value={title} onChange={(e)=>setTitle(e.target.value)}/>
                 </div>
                 <div className="new-expense__control">
-                    <label htmlFor="price">Price :</label>
+                    <label htmlFor="price">Amount :</label>
                     <input type="text" id='price' min='0.01' step='0.01' value={price} onChange={(e)=>setPrice(e.target.value)} />                   
                 </div> 
                 <div className="new-expense__control">
@@ -34,7 +34,8 @@ const ExpenseForm = (props) => {
                 </div>     
             </div>  
             <div className="new-expense__action">
-                <button type='submit'>Add Expense</button>
+                <button onClick={props.onCancel}>Cancel</button>
+                <button  type='submit'>Add Expense</button>
             </div>
         </form>
     )
