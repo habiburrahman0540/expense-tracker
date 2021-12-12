@@ -1,13 +1,14 @@
 
-
+import React,{useState} from 'react'
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
-const expenses = [
+
+const DUMMYDATA = [
   {
     id:'e1',
     title:"Car Insurance",
     price: 285.00,
-    date: new Date(2021 ,2,28)
+    date: new Date(2020 ,2,28)
   },
   {
     id:'e2',
@@ -21,10 +22,14 @@ const expenses = [
     price: 300.00,
     date: new Date(2021 ,8,10)
   },
-]
+];
+
 const App = () =>{
+  const [expenses, setExpenses] = useState(DUMMYDATA)
   const addExpenseHandler =expense=>{
-    console.log(expense)
+    setExpenses((previousExpenses)=>{
+      return [expense, ...previousExpenses]
+    })
   }
   return (
     <div>
